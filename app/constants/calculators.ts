@@ -7,7 +7,7 @@ const financialCalculatorTypes = [
   {
     id: 2,
     title: "Investment Calculator",
-    route: "/pages/calculators/finanace/investment",
+    route: "/pages/calculators/finanace/interest",
   },
   {
     id: 3,
