@@ -1,15 +1,14 @@
 "use client";
 
 import Button from "@/app/components/button";
+import Input from "@/app/components/input";
 import {
   CompoundingFrequency,
   CompoundInterestInput,
 } from "../data/compound_interest";
 import useInterestCalculator from "./use_interest";
 
-type Props = {};
-
-export default function CompoundInterestForm(props: Props) {
+export default function CompoundInterestForm() {
   const { input, setInput, result, calculateCompoundInterest } =
     useInterestCalculator();
 
@@ -32,126 +31,64 @@ export default function CompoundInterestForm(props: Props) {
 
         {/* Input Form */}
         <div className="space-y-6 mb-8">
-          {/* Principal */}
-          <div>
-            <label className="block text-sm font-semibold text-zinc-700 mb-2">
-              Principal Amount: ${input.principal}
-            </label>
-            <input
-              type="range"
-              min="100"
-              max="1000000"
-              step="1000"
-              value={input.principal}
-              onChange={(e) =>
-                handleInputChange("principal", parseFloat(e.target.value))
-              }
-              className="w-full"
-            />
-            <input
-              type="number"
-              value={input.principal}
-              onChange={(e) =>
-                handleInputChange("principal", parseFloat(e.target.value))
-              }
-              className="mt-2 w-full px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-              placeholder="Enter principal amount"
-            />
-          </div>
+          <Input
+            label="Principal Amount"
+            value={input.principal}
+            onChange={(val) => handleInputChange("principal", val)}
+            type="range"
+            min={100}
+            max={1000000}
+            step={1000}
+            suffix="$"
+          />
 
-          {/* Annual Rate */}
-          <div>
-            <label className="block text-sm font-semibold text-zinc-700 mb-2">
-              Annual Interest Rate: {input.annualRate}%
-            </label>
-            <input
-              type="range"
-              min="0"
-              max="50"
-              step="0.1"
-              value={input.annualRate}
-              onChange={(e) =>
-                handleInputChange("annualRate", parseFloat(e.target.value))
-              }
-              className="w-full"
-            />
-            <input
-              type="number"
-              value={input.annualRate}
-              onChange={(e) =>
-                handleInputChange("annualRate", parseFloat(e.target.value))
-              }
-              className="mt-2 w-full px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-              placeholder="Enter annual rate"
-            />
-          </div>
+          <Input
+            label="Annual Interest Rate"
+            value={input.annualRate}
+            onChange={(val) => handleInputChange("annualRate", val)}
+            type="range"
+            min={0}
+            max={50}
+            step={0.1}
+            suffix="%"
+          />
 
-          {/* Years */}
-          <div>
-            <label className="block text-sm font-semibold text-zinc-700 mb-2">
-              Investment Duration: {input.years} years
-            </label>
-            <input
-              type="range"
-              min="1"
-              max="50"
-              step="1"
-              value={input.years}
-              onChange={(e) =>
-                handleInputChange("years", parseFloat(e.target.value))
-              }
-              className="w-full"
-            />
-            <input
-              type="number"
-              value={input.years}
-              onChange={(e) =>
-                handleInputChange("years", parseFloat(e.target.value))
-              }
-              className="mt-2 w-full px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-              placeholder="Enter years"
-            />
-          </div>
+          <Input
+            label="Investment Duration"
+            value={input.years}
+            onChange={(val) => handleInputChange("years", val)}
+            type="range"
+            min={1}
+            max={50}
+            step={1}
+            suffix=" years"
+          />
 
-          {/* Compounding Frequency */}
-          <div>
-            <label className="block text-sm font-semibold text-zinc-700 mb-2">
-              Compounding Frequency
-            </label>
-            <select
-              value={input.compoundingFrequency}
-              onChange={(e) =>
-                handleInputChange(
-                  "compoundingFrequency",
-                  parseFloat(e.target.value) as CompoundingFrequency
-                )
-              }
-              className="w-full px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-            >
-              <option value={1}>Annually</option>
-              <option value={4}>Quarterly</option>
-              <option value={12}>Monthly</option>
-            </select>
-          </div>
+          <Input
+            label="Compounding Frequency"
+            value={input.compoundingFrequency}
+            onChange={(val) =>
+              handleInputChange(
+                "compoundingFrequency",
+                val as CompoundingFrequency
+              )
+            }
+            type="select"
+            options={[
+              { value: 1, label: "Annually" },
+              { value: 4, label: "Quarterly" },
+              { value: 12, label: "Monthly" },
+            ]}
+            showValue={false}
+          />
 
-          {/* Monthly Contribution */}
-          <div>
-            <label className="block text-sm font-semibold text-zinc-700 mb-2">
-              Monthly Contribution (Optional): ${input.monthlyContribution || 0}
-            </label>
-            <input
-              type="number"
-              value={input.monthlyContribution || 0}
-              onChange={(e) =>
-                handleInputChange(
-                  "monthlyContribution",
-                  parseFloat(e.target.value)
-                )
-              }
-              className="w-full px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:border-zinc-900"
-              placeholder="Enter monthly contribution"
-            />
-          </div>
+          <Input
+            label="Monthly Contribution (Optional)"
+            value={input.monthlyContribution || 0}
+            onChange={(val) => handleInputChange("monthlyContribution", val)}
+            type="number"
+            suffix="$"
+          />
         </div>
 
         {/* Calculate Button */}
