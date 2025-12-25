@@ -1,23 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import Button from "@/app/components/button";
 import {
+  CompoundingFrequency,
   CompoundInterestInput,
-  CompoundInterestResult,
 } from "../data/compound_interest";
+import useInterestCalculator from "./use_interest";
 
 type Props = {};
 
 export default function CompoundInterestForm(props: Props) {
-  const [input, setInput] = useState<CompoundInterestInput>({
-    principal: 1000,
-    annualRate: 7,
-    years: 10,
-    compoundingFrequency: 12,
-    monthlyContribution: 0,
-  });
-
-  const [result, setResult] = useState<CompoundInterestResult | null>(null);
+  const { input, setInput, result, calculateCompoundInterest } =
+    useInterestCalculator();
 
   const handleInputChange = (
     field: keyof CompoundInterestInput,
@@ -27,34 +21,6 @@ export default function CompoundInterestForm(props: Props) {
       ...prev,
       [field]: value,
     }));
-  };
-
-  const calculateCompoundInterest = () => {
-    const {
-      principal,
-      annualRate,
-      years,
-      compoundingFrequency,
-      monthlyContribution = 0,
-    } = input;
-
-    // Calculate compound interest formula: A = P(1 + r/n)^(nt)
-    const rate = annualRate / 100;
-    const n = compoundingFrequency;
-    const t = years;
-
-    const compoundPart = Math.pow(1 + rate / n, n * t);
-    const finalBalance =
-      principal * compoundPart + monthlyContribution * 12 * t;
-
-    const totalContributions = principal + monthlyContribution * 12 * years;
-    const totalInterest = finalBalance - totalContributions;
-
-    setResult({
-      finalBalance: Math.round(finalBalance * 100) / 100,
-      totalContributions: Math.round(totalContributions * 100) / 100,
-      totalInterest: Math.round(totalInterest * 100) / 100,
-    });
   };
 
   return (
@@ -189,12 +155,7 @@ export default function CompoundInterestForm(props: Props) {
         </div>
 
         {/* Calculate Button */}
-        <button
-          onClick={calculateCompoundInterest}
-          className="w-full bg-zinc-900 text-white font-semibold py-3 rounded-lg hover:bg-zinc-800 transition mb-8"
-        >
-          Calculate
-        </button>
+        <Button buttonText="Calculate" onClick={calculateCompoundInterest} />
 
         {/* Results */}
         {result && (
