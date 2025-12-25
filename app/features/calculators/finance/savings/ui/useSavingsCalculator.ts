@@ -1,7 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import type { SavingsCalculatorInput, SavingsCalculatorResult } from '../data/savings';
+import { useState } from "react";
+import type {
+  SavingsCalculatorInput,
+  SavingsCalculatorResult,
+} from "../data/savings";
 
 export const useSavingsCalculator = () => {
   const [input, setInput] = useState<SavingsCalculatorInput>({
@@ -14,7 +17,8 @@ export const useSavingsCalculator = () => {
   const [result, setResult] = useState<SavingsCalculatorResult | null>(null);
 
   const calculateSavings = () => {
-    const { initialBalance, monthlyContribution, annualReturn, timeHorizon } = input;
+    const { initialBalance, monthlyContribution, annualReturn, timeHorizon } =
+      input;
 
     // Monthly return rate (annual return / 12 / 100)
     const monthlyReturn = annualReturn / 100 / 12;
@@ -23,15 +27,18 @@ export const useSavingsCalculator = () => {
     const totalMonths = timeHorizon * 12;
 
     // Future value of initial balance: P * (1 + r)^n
-    const fvInitialBalance = initialBalance * Math.pow(1 + monthlyReturn, totalMonths);
+    const fvInitialBalance =
+      initialBalance * Math.pow(1 + monthlyReturn, totalMonths);
 
     // Future value of monthly contributions (Future Value of Annuity)
     // FV = PMT * [((1 + r)^n - 1) / r]
     const fvMonthlyContributions =
-      monthlyContribution * ((Math.pow(1 + monthlyReturn, totalMonths) - 1) / monthlyReturn);
+      monthlyContribution *
+      ((Math.pow(1 + monthlyReturn, totalMonths) - 1) / monthlyReturn);
 
     const finalBalance = fvInitialBalance + fvMonthlyContributions;
-    const totalContributions = initialBalance + monthlyContribution * totalMonths;
+    const totalContributions =
+      initialBalance + monthlyContribution * totalMonths;
     const totalInterestEarned = finalBalance - totalContributions;
     const averageMonthlyGrowth = (finalBalance - initialBalance) / totalMonths;
 
