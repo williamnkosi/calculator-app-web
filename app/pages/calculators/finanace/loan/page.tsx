@@ -1,7 +1,5 @@
+import LoanCalculatorForm from "@/app/features/calculators/finance/loan/ui/loan_form";
+
 export default function LoanCalculator() {
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold text-zinc-800">Loan Calculator</h1>
-    </div>
-  );
+  return <LoanCalculatorForm />;
 }
