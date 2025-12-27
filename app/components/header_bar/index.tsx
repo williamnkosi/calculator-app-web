@@ -17,18 +17,18 @@ export default function HeaderBar() {
 
           {/* Navigation/Actions */}
           <nav className="hidden md:flex space-x-8">
-            <a
+            {/* <a
               href="#"
               className="text-zinc-600 hover:text-zinc-900 transition"
             >
               Favorites
-            </a>
-            <a
-              href="#"
+            </a> */}
+            <Link
+              href="/pages/settings"
               className="text-zinc-600 hover:text-zinc-900 transition"
             >
               Settings
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
