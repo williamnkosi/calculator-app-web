@@ -6,7 +6,7 @@ export default function Home() {
     <div>
       <div className="justify-center flex row ">{/* <SearchBar /> */}</div>
 
-      <div className="flex flex-col justify-start gap-4  ">
+      <div className="flex flex-col justify-start gap-4">
         <div className="border-b-2 border-zinc-800 pb-2">
           <h5 className="text-3xl font-semibold text-zinc-800">
             Financial Calculators
