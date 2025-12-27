@@ -3,9 +3,8 @@ import SearchBar from "./components/search_bar";
 
 export default function Home() {
   return (
-    <div>
-      <div className="justify-center flex row ">{/* <SearchBar /> */}</div>
-
+    <div className="max-w-2xl mx-auto">
+      <div className="justify-center flex row  ">{/* <SearchBar /> */}</div>
       <div className="flex flex-col justify-start gap-4">
         <div className="border-b-2 border-zinc-800 pb-2">
           <h5 className="text-3xl font-semibold text-zinc-800">

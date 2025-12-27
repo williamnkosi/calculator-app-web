@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <HeaderBar />
-        <div className="flex flex-col min-h-screen justify-items-start bg-zinc-50 font-sans p-6">
+        <div className="flex flex-col min-h-screen bg-zinc-50 font-sans p-6">
           {children}
         </div>
       </body>
